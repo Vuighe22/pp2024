@@ -7,19 +7,17 @@ List_Mark = []
 # Check Date valid or invalid
 def check_date(date, month, year):
     a = False
-
-    # Switch case equivalent in Python using if-elif-else
     if month == 2:  # Thang 2
-        if (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0):  # Kiem tra nam nhuan
+        if (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0):  # leap year
             if 0 < date <= 29:
                 a = True
         else:
             if 0 < date <= 28:
                 a = True
-    elif month in [1, 3, 5, 7, 8, 10, 12]:  # Thang 1,3,5,7,8,10,12
+    elif month in [1, 3, 5, 7, 8, 10, 12]:  # month 1,3,5,7,8,10,12
         if 0 < date <= 31:
             a = True
-    elif month in [4, 6, 9, 11]:  # Thang 4,6,9,11
+    elif month in [4, 6, 9, 11]:  # month 4,6,9,11
         if 0 < date <= 30:
             a = True
 
@@ -35,13 +33,13 @@ def NumberofStudent():
 def InputStudent(n):
     for id in range(n):
         print('Enter the data for Student - ',id+1)
-        print('ID',end=' ')
+        print('ID:',end=' ')
         ID = input()
         print('Name:',end=' ')
         name = input()
         print('Date of birth (format:Day/Mon/Year)',end=' ')
         Day,Mon,Year = map(int,input().split('/'))
-        while(check_date(Day,Mon,Year)==False):
+        while(check_date(Day,Mon,Year)==False): # Check birthdate is valid
             print("The student's bithdate is invalid, please enter again! ")
             print('Date of birth (format:Day/Mon/Year)',end=' ')
             Day,Mon,Year = map(int,input().split('/'))
@@ -60,7 +58,7 @@ def InputCourse():
     Num_course = int(input())
     for id in range(Num_course):
         print('Enter the data for Course - ',id+1)
-        print('ID',end=' ')
+        print('ID:',end=' ')
         ID = input()
         print('Name:',end=' ')
         name = input()
@@ -78,7 +76,7 @@ def Show_Inf_St():
         for key,val in St.items():
             if key == 'Date of birth':
                 day,month,year = val
-                print(key,end=':')
+                print(key,end=': ')
                 print(day,month,year,sep='/')
             else:
                 print(key,':',val)
