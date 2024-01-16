@@ -1,4 +1,4 @@
-from math import *
+
 # define a list to store inform of Student
 List_St = []
 List_Cs = []
@@ -7,7 +7,7 @@ List_Mark = []
 # Check Date valid or invalid
 def check_date(date, month, year):
     a = False
-    if month == 2:  # Thang 2
+    if month == 2:  # moth 2
         if (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0):  # leap year
             if 0 < date <= 29:
                 a = True
@@ -29,9 +29,19 @@ class Student:
         self.__Name = name
         self.__IDStudent = id
         self.__DoB = DoB
+
+    def get_Namest(self):
+        return self.__Name
+    
+    def get_IDStudent(self):
+        return self.__IDStudent
+    
+    def get_DoB(self):
+        return self.__DoB
     
     def __str__(self):
         return f"Name: {self.__Name}\nID of Student: {self.__IDStudent}\nDate of birth: {self.__DoB}"
+
 
 # class for Course
 class Course:
@@ -41,20 +51,26 @@ class Course:
 
     def __str__(self):
         return f'Name: {self.__Name}\nID of course: {self.__IDCourse}'
+    
+    def get_NameCs(self):
+        return self.__Name
+    
+    def get_IDCourse(self):
+        return self.__IDCourse
 
 # class for Mark
 class Mark:
-    def __init__(self,StudentIf,CourseIf):
-        self.StudentIf = StudentIf
-        self.CourseIf = CourseIf
+    def __init__(self,StudentIf,CourseIf,Mark):
+        self.__StudentIf = StudentIf
+        self.__CourseIf = CourseIf
+        self.__Mark = Mark
 
     def __str__(self) -> str:
-        return f'___Student__ \n{self.StudentIf}\n___Mark of course__\n{self.CourseIf}'
+        return f'___Student__ \n{self.__StudentIf}\n___Mark of course__\n{self.__CourseIf} : {self.__Mark}'
 
 # functions for importing data of Students
 def InputStudent():
-    print('Enter the number of Student: ',end=' ')
-    n = int(input())
+    n = int(input('Enter the number of Student: '))
     for id in range(n):
         print('Enter the data for Student - ',id+1)
         print('ID:',end=' ')
@@ -64,7 +80,7 @@ def InputStudent():
         print('Date of birth (format:Day/Mon/Year)',end=' ')
         Day,Mon,Year = map(int,input().split('/'))
         while(check_date(Day,Mon,Year)==False): # Check birthdate is valid
-            print("The student's bithdate is invalid, please enter again! ")
+            print("The student's birthdate is invalid, please enter again! ")
             print('Date of birth (format:Day/Mon/Year)',end=' ')
             Day,Mon,Year = map(int,input().split('/'))
         birth_date = [Day,Mon,Year]
@@ -74,8 +90,7 @@ def InputStudent():
 
 # func for importing data of courses
 def InputCourse():
-    print('Enter Number of Course:',end=' ')
-    Num_course = int(input())
+    Num_course = int(input('Enter Number of Course:'))
     for id in range(Num_course):
         print('Enter the data for Course - ',id+1)
         print('ID:',end=' ')
@@ -86,7 +101,19 @@ def InputCourse():
         List_Cs.append(Infor_Cs)
         print()
 
+# Import mark for Student
+def Mark_infor():
+    for St in List_St:
+        print('Enter marks for Student with Id: ', St.get_IDStudent())
+        for Cs in List_Cs:
+            print('Marks in Course: ',Cs.get_NameCs())
+            mark = int(input("Mark: "))
+            Mark_in4 = Mark(St,Cs,mark)
+            List_Mark.append(Mark_in4)
+        print()
+
 # main function 
 if __name__ == '__main__':
     InputStudent()
     InputCourse()
+    Mark_infor()
