@@ -137,14 +137,14 @@ def Show_Mark():
     print('--------------- Mark Table ----------------')
     header = ['Student ID', 'Student Name']
     for Cs in List_Cs:
-        header += [''] + [Cs.get_NameCs()]
+        header += [Cs.get_NameCs()]
     print('\t'.join(header))
     for St in List_St:
         row = [St.get_IDStudent(), St.get_Namest()]
         for mark in List_Mark:
             if mark.get_StudentIf() == St:
                 row += [str(mark.get_Marks())]
-        print('\t \t'.join(row))
+        print('\t'.join(row))
 
 # main function 
 if __name__ == '__main__':
