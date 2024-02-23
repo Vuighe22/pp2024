@@ -6,7 +6,7 @@ List_St = []
 List_Cs = []
 List_Mark = []
 # define numpy array and it's dtype
-dtype = [('NameSt', 'U50'), ('IdSt', 'U10'), ('DoB', 'U10'), ('GPA', 'f')]
+dtype = [('NameSt', 'U50'), ('IdSt', 'U10'), ('DoB', 'U10'), ('GPA', 'f2')]
 Gpa = np.array([])
 
 
@@ -164,10 +164,14 @@ def cal_GPA():
 # Print information of Student
 def Show_Inf_St():
     print('------------- Inform of Students ----------------')
-    # for St in List_St:
-    #     print(St)
-    #     print()
-    print(Gpa)
+    stt = 1
+    for i in Gpa:
+        print(stt,'Name of Student:',end=' ')
+        print(i['NameSt'],end='-')
+        print(i['IdSt'],end=' - GPA:')
+        print(i['GPA'])
+        stt+=1
+    # print(Gpa)
 
 
 # Print information of Course
