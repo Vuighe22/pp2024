@@ -1,5 +1,9 @@
 import numpy as np
 import math
+import curses
+import sys
+
+menu = ['Input Data','Print Data','Exit']
 
 # define a list to store inform of Student
 List_St = []
@@ -161,17 +165,17 @@ def cal_GPA():
     Gpa = np.array(student_info, dtype=dtype)
     Gpa = np.sort(Gpa,order='GPA')[::-1]
 
+
 # Print information of Student
 def Show_Inf_St():
     print('------------- Inform of Students ----------------')
     stt = 1
     for i in Gpa:
         print(stt,'Name of Student:',end=' ')
-        print(i['NameSt'],end='-')
-        print(i['IdSt'],end=' - GPA:')
+        print(i['NameSt'],end='- ID: ')
+        print(i['IdSt'],end=' - GPA: ')
         print(i['GPA'])
         stt+=1
-    # print(Gpa)
 
 
 # Print information of Course
@@ -196,13 +200,103 @@ def Show_Mark():
                 row += [str(mark.get_Marks())]
         print('\t'.join(row))
 
+# Display the menu
+def print_menu(stdscr,selected_opt):
+    curses.init_pair(2,curses.COLOR_BLACK,curses.COLOR_WHITE)
+    h,w = stdscr.getmaxyx()
+    # stdscr.clear()
+    for idx,opt in enumerate(menu):
+        x = w//2 - len(opt)//2
+        y = h//2 - len(menu)//2 + idx
+        stdscr.addstr(y,x,opt)
+        if idx == selected_opt:
+            stdscr.attron(curses.color_pair(2))
+            stdscr.addstr(y,x,opt)
+            stdscr.attroff(curses.color_pair(2))
+        else:
+            stdscr.addstr(y,x,opt)
+    stdscr.refresh()
+
+# Decorate the UI
+def main(stdscr):
+    curses.initscr()
+    curses.curs_set(0)
+    curses.noecho()
+    
+    curses.init_pair(1,curses.COLOR_GREEN,curses.COLOR_WHITE)
+    curses.init_pair(2,curses.COLOR_BLACK,curses.COLOR_WHITE)
+    curses.init_pair(3, curses.COLOR_BLUE, curses.COLOR_YELLOW)
+    BLUE_AND_YELLOW = curses.color_pair(3)
+    GREEN_AND_WHITE = curses.color_pair(1)
+    GREEN_AND_BLACK = curses.color_pair(2)
+
+    stdscr.clear()
+    stdscr.attron(GREEN_AND_WHITE)
+    stdscr.border()
+    stdscr.attroff(GREEN_AND_WHITE)
+
+    
+    stdscr.nodelay(True)
+
+    current_opt = 0
+    while True:
+        try: 
+            key = stdscr.getkey()
+        except:
+            key = None
+        # stdscr.clear()
+        h,w = stdscr.getmaxyx()
+        Title = 'User Interface'
+        x = w//2 - len(Title)//2 #Printing text in center of screen
+        y = h//2 - len(menu)//2 -3
+        stdscr.addstr(y,x,Title,BLUE_AND_YELLOW | curses.A_UNDERLINE)
+        stdscr.addstr(y+1,x-6,'(PRESS RIGHT KEY TO ENTER)')
+        stdscr.refresh()
+        
+        print_menu(stdscr,current_opt)
+        
+        if key == 'KEY_UP' and current_opt > 0:
+            current_opt -= 1
+        if key == 'KEY_DOWN' and current_opt < len(menu) -1:
+            current_opt += 1
+        if key == 'KEY_RIGHT':
+            # stdscr.clear()
+            if current_opt == len(menu) -1:
+                sys.exit() # out of the program
+            if menu[current_opt] == 'Input Data':
+                curses.endwin()
+                InputStudent()
+                InputCourse()
+                Mark_infor()
+                cal_GPA()
+            if menu[current_opt] == 'Print Data':
+                curses.endwin()
+                Show_Inf_St()
+                Show_Inf_Cs()
+                Show_Mark()
+                input('Press ENTER key to continue')
+            stdscr.refresh()
+            stdscr.getch()          
+        print_menu(stdscr,current_opt)
+        stdscr.refresh()
+
+    curses.curs_set(1)
+    curses.echo()
+
+    stdscr.getch()
+    curses.endwin()
+
+
 
 # main function
 if __name__ == '__main__':
-    InputStudent()
-    InputCourse()
-    Mark_infor()
-    cal_GPA()
-    Show_Inf_St()
-    Show_Inf_Cs()
-    Show_Mark()
+    # InputStudent()
+    # InputCourse()
+    # Mark_infor()
+    # cal_GPA()
+    # Show_Inf_St()
+    # Show_Inf_Cs()
+    # Show_Mark()
+    while True:
+     curses.wrapper(main)
+
