@@ -79,23 +79,4 @@ def Mark_infor():
             List_Mark.append(Mark_in4)
         print()
 
-# function to calculate GPA
-def cal_GPA():
-    student_info = []
-    for student in List_St:
-        final_GPA = 0
-        weighted_sum = 0
-        total_credit = 0
-        for mark in List_Mark:
-            if student == mark.get_StudentIf():
-                weighted_sum += mark.get_Marks() * mark.get_Course().get_Credit()
-                total_credit += mark.get_Course().get_Credit()
-        if total_credit != 0:
-            final_GPA = weighted_sum / total_credit
-        student.set_GPA(final_GPA)
-        student_info.append((student.get_Namest(), student.get_IDStudent(), student.get_formattedDoB(), final_GPA))
-
-    global Gpa
-    Gpa = np.array(student_info, dtype=dtype)
-    Gpa = np.sort(Gpa,order='GPA')[::-1]
 
