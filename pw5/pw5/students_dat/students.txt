@@ -1,0 +1,8 @@
+_ Full name: le tuan dat
+_ ID of Student: 13077
+_ Date of birth: 2/3/2004
+_ GPA: 19.0
+_ Full name: ta minh duc
+_ ID of Student: 13078
+_ Date of birth: 3/4/2004
+_ GPA: 18.0

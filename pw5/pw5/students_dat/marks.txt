@@ -1,0 +1,44 @@
+___Student__ 
+_ Full name: le tuan dat
+_ ID of Student: 13077
+_ Date of birth: 2/3/2004
+_ GPA: 19.0
+
+___Mark of course__
+_ Name course: java
+_ ID of course: 77
+_ Credit: 4
+ : 19.0
+___Student__ 
+_ Full name: le tuan dat
+_ ID of Student: 13077
+_ Date of birth: 2/3/2004
+_ GPA: 19.0
+
+___Mark of course__
+_ Name course: python
+_ ID of course: 88
+_ Credit: 4
+ : 19.0
+___Student__ 
+_ Full name: ta minh duc
+_ ID of Student: 13078
+_ Date of birth: 3/4/2004
+_ GPA: 18.0
+
+___Mark of course__
+_ Name course: java
+_ ID of course: 77
+_ Credit: 4
+ : 18.0
+___Student__ 
+_ Full name: ta minh duc
+_ ID of Student: 13078
+_ Date of birth: 3/4/2004
+_ GPA: 18.0
+
+___Mark of course__
+_ Name course: python
+_ ID of course: 88
+_ Credit: 4
+ : 18.0

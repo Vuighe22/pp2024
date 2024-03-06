@@ -1,0 +1,6 @@
+_ Name course: java
+_ ID of course: 77
+_ Credit: 4
+_ Name course: python
+_ ID of course: 88
+_ Credit: 4
