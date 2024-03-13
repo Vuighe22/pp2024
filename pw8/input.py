@@ -3,6 +3,7 @@ import math
 from domais import *
 import zipfile
 import pickle
+import threading
 
 menu = ['Input Data', 'Print Data','Extract students.dat', 'Exit']
 
@@ -84,22 +85,35 @@ def Mark_infor():
 
 # write to students.txt
 def std_to_file():
-    with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\students.txt','wb') as std_file:
+    with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\students.txt','wb') as std_file:
         pickle.dump(List_St,std_file)
 
 # write to courses.txt
 def cs_to_file():
-    with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\courses.txt','wb') as cs_file:
+    with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\courses.txt','wb') as cs_file:
         pickle.dump(List_Cs,cs_file)
 
 # write to marks.txt
 def mk_to_file():
-    with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\marks.txt','wb') as mk_file:
+    with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\marks.txt','wb') as mk_file:
         pickle.dump(List_Mark,mk_file)
 
 # Compress the files
 def compress_files():
-    with zipfile.ZipFile(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\students.dat.zip', 'w') as file_zip:
-        file_zip.write(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\students.txt', arcname='students.txt')
-        file_zip.write(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\courses.txt', arcname='courses.txt')
-        file_zip.write(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\marks.txt', arcname='marks.txt')
+    with zipfile.ZipFile(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\students.dat.zip', 'w') as file_zip:
+        file_zip.write(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\students.txt', arcname='students.txt')
+        file_zip.write(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\courses.txt', arcname='courses.txt')
+        file_zip.write(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\marks.txt', arcname='marks.txt')
+
+# Background thread for writing to files using pickle
+def background_persistence():
+    std_thread = threading.Thread(target=std_to_file)
+    cs_thread = threading.Thread(target=cs_to_file)
+    mk_thread = threading.Thread(target=mk_to_file)
+    std_thread.start()
+    cs_thread.start()
+    mk_thread.start()
+    std_thread.join()
+    cs_thread.join()
+    mk_thread.join()
+    compress_files()

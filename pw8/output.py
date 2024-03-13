@@ -41,7 +41,7 @@ def Show_Inf_St():
 # Print information of Course
 def Show_Inf_Cs():
     print('------------- Inform of Courses ----------------')
-    with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\students_dat\courses.txt','rb') as cs_file:
+    with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\students_dat\courses.txt','rb') as cs_file:
         List_Cs = pickle.load(cs_file)
         for cs in List_Cs:
             print(cs)
@@ -51,16 +51,16 @@ def Show_Inf_Cs():
 def Show_Mark():
     print('--------------- Mark Table ----------------')
     header = ['Student ID', 'Student Name']
-    with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\students_dat\courses.txt','rb') as cs_file:
+    with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\students_dat\courses.txt','rb') as cs_file:
         List_Cs = pickle.load(cs_file)
         for Cs in List_Cs:
             header += [Cs.get_NameCs()]
         print('\t'.join(header))
-        with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\students_dat\students.txt','rb') as st_file:
+        with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\students_dat\students.txt','rb') as st_file:
             List_St = pickle.load(st_file)
             for St in List_St:
                 row = [St.get_IDStudent(),' '*(len(header[0])-len(St.get_IDStudent())+6), St.get_Namest(),' '*(len(header[1])-len(St.get_Namest())+4)]
-                with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\students_dat\marks.txt','rb') as mk_file:
+                with open(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\students_dat\marks.txt','rb') as mk_file:
                     List_Mark = pickle.load(mk_file) 
                     for mark in List_Mark:
                         current_header = 2
@@ -89,11 +89,11 @@ def print_menu(stdscr,selected_opt):
 
 # Decompress students.dat.zip
 def decompress_files():
-    if os.path.exists(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\students.dat.zip'):
-        directory = r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\students_dat'
+    if os.path.exists(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\students.dat.zip'):
+        directory = r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\students_dat'
         if not os.path.exists(directory):
             os.makedirs(directory)
-        with zipfile.ZipFile(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw6\students.dat.zip', 'r') as zip_object:
+        with zipfile.ZipFile(r'C:\Users\PC\Documents\Python_for_Son\pp2024\pw8\students.dat.zip', 'r') as zip_object:
             zip_object.extractall(directory)
         
         print(f'Files are extracted to {directory}')
